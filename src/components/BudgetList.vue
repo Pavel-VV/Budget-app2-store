@@ -3,22 +3,23 @@
     <ElCard :header="header">
       <template v-if="!isEmpty">
         <div v-for="(item, prop) in list" :key="prop">
-          <BudgetListItem v-show="!(item.type === sortButton)" :listItem="item" @deleteItem="onDeleteElement"/>
+          <BudgetListItem
+            v-show="!(item.type === sortButton)"
+            :listItem="item"
+            @deleteItem="onDeleteElement"
+          />
         </div>
       </template>
-      <ElAlert v-else type="info" :title="emptyTitle" :closable="false"/>
-
-
+      <ElAlert v-else type="info" :title="emptyTitle" :closable="false" />
     </ElCard>
   </div>
-
 </template>
 
 <script>
-import BudgetListItem from '@/components/BudgetListItem';
+import BudgetListItem from "@/components/BudgetListItem";
 
 export default {
-  name: 'BudgetList',
+  name: "BudgetList",
   components: {
     BudgetListItem,
   },
@@ -29,28 +30,28 @@ export default {
     },
     sortButton: {
       type: String,
-      default: 'ALL',
-    }
+      default: "ALL",
+    },
   },
   data: () => ({
-    header: 'Budjet List',
+    header: "Budjet List",
     emptyTitle: "Empty List",
   }),
   methods: {
     onDeleteElement(id) {
-      this.$emit('deleteItemInApp', id);
+      this.$emit("deleteItemInApp", id);
     },
   },
   computed: {
     isEmpty() {
-      return !Object.keys(this.list).length
+      return !Object.keys(this.list).length;
     },
     sortList() {
-      console.log(this.sortButton)
-      return 1
-    }
-  }
-}
+      console.log(this.sortButton);
+      return 1;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -58,5 +59,4 @@ export default {
   max-width: 500px;
   margin: auto;
 }
-
 </style>
