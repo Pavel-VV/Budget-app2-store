@@ -2,7 +2,7 @@
   <div class="budget-list-wrap">
     <ElCard :header="header">
       <template v-if="!isEmpty">
-        <div v-for="(item, prop) in list" :key="prop">
+        <div v-for="(item, prop) in getList" :key="prop">
           <BudgetListItem
             v-show="!(item.type === sortButton)"
             :listItem="item"
@@ -17,6 +17,7 @@
 
 <script>
 import BudgetListItem from "@/components/BudgetListItem";
+import { mapGetters } from "vuex";
 
 export default {
   name: "BudgetList",
@@ -24,10 +25,10 @@ export default {
     BudgetListItem,
   },
   props: {
-    list: {
-      type: Object,
-      default: () => ({}),
-    },
+    // list: {
+    //   type: Object,
+    //   default: () => ({}),
+    // },
     sortButton: {
       type: String,
       default: "ALL",
@@ -43,8 +44,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters("listStore", ["getList"]),
     isEmpty() {
-      return !Object.keys(this.list).length;
+      return !Object.keys(this.getList).length;
     },
     sortList() {
       console.log(this.sortButton);

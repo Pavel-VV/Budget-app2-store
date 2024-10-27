@@ -1,13 +1,9 @@
 <template>
   <div id="app">
     <FormData @submitDataForm="onSubmitDataForm" />
-    <TotalBalance :total="totalBalance" />
+    <TotalBalance />
     <SortList @onSortList="sortList" />
-    <BudgetList
-      :list="list"
-      :sortButton="sortButtonList"
-      @deleteItemInApp="onDeleteItem"
-    />
+    <BudgetList :sortButton="sortButtonList" @deleteItemInApp="onDeleteItem" />
   </div>
 </template>
 
@@ -53,13 +49,6 @@ export default {
     sortList(type) {
       console.log("in App:", type);
       this.sortButtonList = type;
-    },
-  },
-  computed: {
-    totalBalance() {
-      return Object.values(this.list).reduce((acc, el) => {
-        return acc + el.value;
-      }, 0);
     },
   },
 };
