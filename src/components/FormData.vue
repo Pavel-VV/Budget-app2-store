@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "FormData",
   data: () => {
@@ -59,6 +60,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions("listStore", ["addNewData"]),
     onSubmitForm() {
       this.$refs.addItemForm.validate((valid) => {
         if (valid) {
@@ -75,8 +77,8 @@ export default {
                 ? this.formData.value
                 : this.formData.value * -1;
           }
-
-          this.$emit("submitDataForm", { ...this.formData });
+          this.addNewData({ ...this.formData });
+          // this.$emit("submitDataForm", { ...this.formData });
           this.$refs.addItemForm.resetFields();
         }
       });

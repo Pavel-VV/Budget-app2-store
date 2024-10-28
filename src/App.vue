@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FormData @submitDataForm="onSubmitDataForm" />
+    <FormData />
     <TotalBalance />
     <SortList @onSortList="sortList" />
     <BudgetList :sortButton="sortButtonList" @deleteItemInApp="onDeleteItem" />
@@ -42,10 +42,10 @@ export default {
     onDeleteItem(id) {
       this.$delete(this.list, id);
     },
-    onSubmitDataForm(data) {
-      const dataObj = { ...data, id: Math.random() };
-      this.$set(this.list, dataObj.id, dataObj);
-    },
+    // onSubmitDataForm(data) {
+    //   const dataObj = { ...data, id: Math.random() };
+    //   this.$set(this.list, dataObj.id, dataObj);
+    // },
     sortList(type) {
       console.log("in App:", type);
       this.sortButtonList = type;

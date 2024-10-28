@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const listStore = {
   namespaced: true,
   state: {
@@ -24,8 +26,19 @@ const listStore = {
     },
     getList: ({ list }) => list,
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    ADD_DATA_LIST(state, data) {
+      Vue.set(state.list, data.id, data);
+      console.log(state);
+      console.log(data);
+    },
+  },
+  actions: {
+    addNewData({ commit }, data) {
+      const dataObj = { ...data, id: String(Math.random()) };
+      commit("ADD_DATA_LIST", dataObj);
+    },
+  },
 };
 
 export default listStore;
