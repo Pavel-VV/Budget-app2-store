@@ -9,12 +9,6 @@
 import { mapGetters } from "vuex";
 export default {
   name: "TotalBalance",
-  // props: {
-  //   total: {
-  //     type: Number,
-  //     default: 0,
-  //   },
-  // },
   computed: {
     // styleColorTotal(){
     //   return this.total > 0 ? 'green' : (this.total < 0) ? 'red' : 'black';

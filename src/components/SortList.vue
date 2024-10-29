@@ -7,11 +7,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "SortList",
   methods: {
+    ...mapActions("sortList", ["setType"]),
     sortList(type) {
-      this.$emit("onSortList", type);
+      this.setType(type);
     },
   },
 };

@@ -78,7 +78,6 @@ export default {
                 : this.formData.value * -1;
           }
           this.addNewData({ ...this.formData });
-          // this.$emit("submitDataForm", { ...this.formData });
           this.$refs.addItemForm.resetFields();
         }
       });

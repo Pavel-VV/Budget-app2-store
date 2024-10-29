@@ -4,7 +4,7 @@
       <template v-if="!isEmpty">
         <div v-for="(item, prop) in getList" :key="prop">
           <BudgetListItem
-            v-show="!(item.type === sortButton)"
+            v-show="!(item.type === getSortType)"
             :listItem="item"
             @deleteItem="onDeleteElement"
           />
@@ -16,41 +16,31 @@
 </template>
 
 <script>
-import BudgetListItem from "@/components/BudgetListItem";
+import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
+import BudgetListItem from "@/components/BudgetListItem";
 
 export default {
   name: "BudgetList",
   components: {
     BudgetListItem,
   },
-  props: {
-    // list: {
-    //   type: Object,
-    //   default: () => ({}),
-    // },
-    sortButton: {
-      type: String,
-      default: "ALL",
-    },
-  },
   data: () => ({
     header: "Budjet List",
     emptyTitle: "Empty List",
   }),
   methods: {
+    ...mapActions("listStore", ["deleteData"]),
     onDeleteElement(id) {
-      this.$emit("deleteItemInApp", id);
+      this.deleteData(id);
+      // this.$emit("deleteItemInApp", id);
     },
   },
   computed: {
     ...mapGetters("listStore", ["getList"]),
+    ...mapGetters("sortList", ["getSortType"]),
     isEmpty() {
       return !Object.keys(this.getList).length;
-    },
-    sortList() {
-      console.log(this.sortButton);
-      return 1;
     },
   },
 };
